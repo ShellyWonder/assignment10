@@ -1,0 +1,19 @@
+{
+"properties": [
+    {
+      "name": "spoonacular.api.key",
+      "type": "java.lang.String",
+      "description": "The API key for the Spoonacular API."
+    },
+    {
+      "name": "spoonacular.urls.base",
+      "type": "java.lang.String",
+      "description": "The base URL for the Spoonacular API."
+    },
+    {
+      "name": "spoonacular.urls.mealplan",
+      "type": "java.lang.String",
+      "description": "The endpoint for the meal planner API in the Spoonacular API."
+    }
+  ]
+}
