@@ -1,16 +1,16 @@
 package com.wonderwebdev.assignment10.dto;
 
-public class Response {
+public class RequestOptions {
     private String targetCalories;
     private String diet;
     private String exclude;
     private String timeFrame;
 
-    public Response() {
+    public RequestOptions() {
  
     }
 
-    public Response(String targetCalories, String diet, String exclude, String timeFrame) {
+    public RequestOptions(String targetCalories, String diet, String exclude, String timeFrame) {
         this.targetCalories = targetCalories;
         this.diet = diet;
         this.exclude = exclude;
