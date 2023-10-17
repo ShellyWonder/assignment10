@@ -1,9 +1,10 @@
 package com.wonderwebdev.assignment10.services;
 
-import com.wonderwebdev.assignment10.dto.Response;
+import com.wonderwebdev.assignment10.dto.*;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.util.UriComponentsBuilder;
 
 @Service
 public class MealPlanService {
@@ -16,21 +17,28 @@ public class MealPlanService {
     @Value("${spoonacular.urls.mealplan}")
     private String mealPlanUrl;
 
-    public Response getWeeklyMeals(String targetCalories, String diet, String exclude) {
-        
+    public ReturnSpoonacular getWeeklyMeals(String targetCalories, String diet, String exclude) {
         return getMeals(targetCalories, diet, exclude, "weekly");
     }
 
-    public Response getDailyMeals(String targetCalories, String diet, String exclude) {
+    public ReturnSpoonacular getDailyMeals(String targetCalories, String diet, String exclude) {
         return getMeals(targetCalories, diet, exclude, "daily");
     }
 
-    private Response getMeals(String targetCalories, String diet, String exclude, String timeFrame) {
+    private ReturnSpoonacular getMeals(String targetCalories, String diet, String exclude, String timeFrame) {
         RestTemplate restTemplate = new RestTemplate();
-        String url = baseUrl + mealPlanUrl + "?apiKey=" + apiKey + "&targetCalories=" + targetCalories + "&diet=" + diet
-                + "&exclude=" + exclude + "&timeFrame=" + timeFrame;
-        Response response = restTemplate.getForObject(url, Response.class);
-        response.setTimeFrame(timeFrame); // Set the timeFrame parameter in the response
+        
+        // Construct the URL
+        UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(baseUrl + mealPlanUrl)
+                                    .queryParam("apiKey", apiKey)
+                                    .queryParam("targetCalories", targetCalories)
+                                    .queryParam("diet", diet)
+                                    .queryParam("exclude", exclude)
+                                    .queryParam("timeFrame", timeFrame);
+
+        String url = builder.toUriString();
+        
+        ReturnSpoonacular response = restTemplate.getForObject(url, ReturnSpoonacular.class);
         return response;
     }
 }
