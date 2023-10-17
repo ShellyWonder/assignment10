@@ -1,6 +1,6 @@
 package com.wonderwebdev.assignment10.controllers;
 
-import com.wonderwebdev.assignment10.dto.Response;
+import com.wonderwebdev.assignment10.dto.RequestOptions;
 import com.wonderwebdev.assignment10.services.MealPlanService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,13 +16,13 @@ public class MealPlanController {
     private MealPlanService mealPlanService;
 
     @GetMapping("/mealplanner/week")
-    public ResponseEntity<Response> getWeeklyMeals(String targetCalories, String diet, String exclude) {
-        Response response = mealPlanService.getWeeklyMeals(targetCalories, diet, exclude);
-        return new ResponseEntity<Response>(response, HttpStatus.OK);
+    public ResponseEntity<RequestOptions> getWeeklyMeals(String targetCalories, String diet, String exclude) {
+        RequestOptions response = mealPlanService.getWeeklyMeals(targetCalories, diet, exclude));
+        return new ResponseEntity<RequestOptions>(response, HttpStatus.OK);
     }
     @GetMapping("/mealplanner/day")
-    public ResponseEntity<Response> getDailyMeals(String targetCalories, String diet, String exclude) {
-        Response response = mealPlanService.getDailyMeals(targetCalories, diet, exclude);
-        return new ResponseEntity<Response>(response, HttpStatus.OK);
+    public ResponseEntity<RequestOptions> getDailyMeals(String targetCalories, String diet, String exclude) {
+        RequestOptions response = mealPlanService.getDailyMeals(targetCalories, diet, exclude);
+        return new ResponseEntity<RequestOptions>(response, HttpStatus.OK);
     }
 }

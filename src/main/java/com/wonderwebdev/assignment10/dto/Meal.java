@@ -87,12 +87,5 @@ public class Meal {
     public void setSourceUrl(String sourceUrl) {
         this.sourceUrl = sourceUrl;
     }
-    
-
-
-
-
-
-
-    
+   
 }
