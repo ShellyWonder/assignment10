@@ -37,6 +37,7 @@ public class MealPlanService {
                                     .queryParam("timeFrame", timeFrame);
 
         String url = builder.toUriString();
+        System.out.println("API Request URL: " +url);
         
         ReturnSpoonacular response = restTemplate.getForObject(url, ReturnSpoonacular.class);
         return response;
