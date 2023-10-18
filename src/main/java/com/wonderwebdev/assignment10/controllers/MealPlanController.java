@@ -1,6 +1,6 @@
 package com.wonderwebdev.assignment10.controllers;
 
-import com.wonderwebdev.assignment10.dto.ReturnSpoonacular;
+import com.wonderwebdev.assignment10.dto.*;
 import com.wonderwebdev.assignment10.services.MealPlanService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,19 +17,19 @@ public class MealPlanController {
     private MealPlanService mealPlanService;
 
     @GetMapping("/week")
-    public ResponseEntity<ReturnSpoonacular> getWeeklyMeals(
+    public ResponseEntity<WeeklyMealResponse> getWeeklyMeals(
         @RequestParam(name ="targetCalories") String targetCalories, 
         @RequestParam(name ="diet")String diet, 
         @RequestParam(name ="exclude")String exclude) {
-        ReturnSpoonacular response = mealPlanService.getWeeklyMeals(targetCalories, diet, exclude);
-        return new ResponseEntity<ReturnSpoonacular>(response, HttpStatus.OK);
+        WeeklyMealResponse response = mealPlanService.getWeeklyMeals(targetCalories, diet, exclude);
+        return new ResponseEntity<WeeklyMealResponse>(response, HttpStatus.OK);
     }
     @GetMapping("/day")
-    public ResponseEntity<ReturnSpoonacular> getDailyMeals(
+    public ResponseEntity<DailyMealResponse> getDailyMeals(
         @RequestParam(name ="targetCalories") String targetCalories, 
         @RequestParam(name ="diet")String diet, 
         @RequestParam(name ="exclude")String exclude) {
-        ReturnSpoonacular response = mealPlanService.getDailyMeals(targetCalories, diet, exclude);
-        return new ResponseEntity<ReturnSpoonacular>(response, HttpStatus.OK);
+        DailyMealResponse response = mealPlanService.getDailyMeals(targetCalories, diet, exclude);
+        return new ResponseEntity<DailyMealResponse>(response, HttpStatus.OK);
     }
 }

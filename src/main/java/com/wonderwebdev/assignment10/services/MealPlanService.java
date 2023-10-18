@@ -17,29 +17,31 @@ public class MealPlanService {
     @Value("${spoonacular.urls.mealplan}")
     private String mealPlanUrl;
 
-    public ReturnSpoonacular getWeeklyMeals(String targetCalories, String diet, String exclude) {
-        return getMeals(targetCalories, diet, exclude, "weekly");
+    public WeeklyMealResponse getWeeklyMeals(String targetCalories, String diet, String exclude) {
+        return getMeals(targetCalories, diet, exclude, "weekly", WeeklyMealResponse.class);
     }
 
-    public ReturnSpoonacular getDailyMeals(String targetCalories, String diet, String exclude) {
-        return getMeals(targetCalories, diet, exclude, "daily");
+    public DailyMealResponse getDailyMeals(String targetCalories, String diet, String exclude) {
+        return getMeals(targetCalories, diet, exclude, "daily", DailyMealResponse.class);
     }
 
-    private ReturnSpoonacular getMeals(String targetCalories, String diet, String exclude, String timeFrame) {
+    private <T> T getMeals(String targetCalories, String diet, String exclude, String timeFrame, Class<T> responseType) {
         RestTemplate restTemplate = new RestTemplate();
+        String url = buildApiUrl(targetCalories, diet, exclude, timeFrame);
         
+        return restTemplate.getForObject(url, responseType);
+    }
+
+    private String buildApiUrl(String targetCalories, String diet, String exclude, String timeFrame) {
         // Construct the URL
         UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(baseUrl + mealPlanUrl)
-                                    .queryParam("apiKey", apiKey)
-                                    .queryParam("targetCalories", targetCalories)
-                                    .queryParam("diet", diet)
-                                    .queryParam("exclude", exclude)
-                                    .queryParam("timeFrame", timeFrame);
-
-        String url = builder.toUriString();
-        System.out.println("API Request URL: " +url);
+                                .queryParam("apiKey", apiKey)
+                                .queryParam("targetCalories", targetCalories)
+                                .queryParam("diet", diet)
+                                .queryParam("exclude", exclude)
+                                .queryParam("timeFrame", timeFrame);
+     return builder.toUriString();
         
-        ReturnSpoonacular response = restTemplate.getForObject(url, ReturnSpoonacular.class);
-        return response;
     }
+    
 }
