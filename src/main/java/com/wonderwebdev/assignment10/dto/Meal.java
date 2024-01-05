@@ -1,5 +1,7 @@
 package com.wonderwebdev.assignment10.dto;
 
+import java.util.List;
+
 public class Meal {
     private long id;
     private String title;
@@ -7,18 +9,19 @@ public class Meal {
     private int readyInMinutes;
     private int servings;
     private String sourceUrl;
-
+    private List<Meal> mealsList;
     public Meal() {
 
     }
 
 
-    public Meal(long id, String title, String imageType, int readyInMinutes, int servings, String sourceUrl) {
+    public Meal(long id, String title, String imageType, int readyInMinutes, int servings, List<Meal>mealsList, String sourceUrl) {
         this.id = id;
         this.title = title;
         this.imageType = imageType;
         this.readyInMinutes = readyInMinutes;
         this.servings = servings;
+        this.mealsList = mealsList; 
         this.sourceUrl = sourceUrl;
     }   
     public long getId() {
@@ -72,11 +75,19 @@ public class Meal {
 
 
 
+    private List<Meal> meals;
+
     public void setServings(int servings) {
         this.servings = servings;
     }
 
+    public List<Meal> getMeals() {
+        return meals;
+    }
 
+    public void setMeals(List<Meal> meals) {
+        this.meals = meals;
+    }
 
     public String getSourceUrl() {
         return sourceUrl;

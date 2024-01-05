@@ -1,4 +1,4 @@
-package com.wonderwebdev.assignment10.controllers;
+package com.wonderwebdev.assignment10.web;
 
 import com.wonderwebdev.assignment10.dto.*;
 import com.wonderwebdev.assignment10.services.MealPlanService;
